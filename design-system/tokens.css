@@ -1,0 +1,143 @@
+/* LW Advocacia — tokens.css
+   Primitivos primeiro, semânticos depois. Componentes usam só os semânticos.
+   Cores da marca amostradas dos JPEGs: fundo #172639, dourado #C39E65, cinza-azulado #707C86.
+   Breakpoints (use em @media, custom properties não funcionam ali): 640px, 960px, 1200px. */
+
+:root {
+  /* ── Primitivos: cor ─────────────────────────────── */
+  --navy-950: #0f1a28;
+  --navy-900: #172639; /* fundo do logo; header e rodapé */
+  --navy-800: #24384f;
+  --navy-700: #2c4058;
+  --navy-600: #3a5170;
+
+  --slate-300: #a9b2ba;
+  --slate-500: #707c86; /* "ADVOCACIA" do logo */
+  --slate-600: #5a6570;
+
+  --gold-200: #e9dcc3;
+  --gold-400: #c39e65; /* "LW" do logo; só sobre marinho */
+  --gold-600: #8a6a2e;
+  --gold-700: #7a5d27; /* dourado para fundo claro */
+
+  --white: #ffffff;
+  --parchment-100: #f5f2ea;
+  --parchment-200: #ece7da;
+  --warm-300: #d9d2c3;
+  --warm-400: #c4bba9;
+  --warm-500: #8f8676;
+  --warm-700: #5c564b;
+
+  --red-50: #f6e9e6;
+  --red-700: #9b3d33;
+  --green-50: #e8efe9;
+  --green-700: #3f6b4f;
+
+  /* ── Semânticos: cor ─────────────────────────────── */
+  --color-bg: var(--parchment-100);
+  --color-bg-alt: var(--parchment-200);
+  --color-surface: var(--white);
+  --color-surface-inverse: var(--navy-900);
+
+  --color-text: var(--navy-900);
+  --color-text-muted: var(--warm-700);
+  --color-text-inverse: var(--parchment-100);
+  --color-text-inverse-muted: var(--slate-300);
+  --color-eyebrow: var(--slate-600);
+  --color-eyebrow-inverse: var(--gold-400);
+
+  --color-border: var(--warm-300);
+  --color-border-strong: var(--warm-400);
+  --color-border-input: var(--warm-500);
+  --color-border-inverse: var(--navy-700);
+
+  --color-action: var(--navy-900);
+  --color-action-hover: var(--navy-800);
+  --color-action-active: var(--navy-950);
+  --color-action-text: var(--white);
+
+  --color-accent: var(--gold-400);
+  --color-accent-on-light: var(--gold-700);
+
+  --color-focus: var(--navy-900);
+  --color-focus-inverse: var(--gold-400);
+
+  --color-error: var(--red-700);
+  --color-error-bg: var(--red-50);
+  --color-success: var(--green-700);
+  --color-success-bg: var(--green-50);
+
+  /* ── Tipografia ──────────────────────────────────── */
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Escala fluida: mínimo em 390px, máximo em 1440px */
+  --text-display: clamp(2.5rem, 1.757rem + 3.048vw, 4.5rem);    /* 40 → 72 */
+  --text-h1: clamp(2.125rem, 1.614rem + 2.095vw, 3.5rem);       /* 34 → 56 */
+  --text-h2: clamp(1.75rem, 1.379rem + 1.524vw, 2.75rem);       /* 28 → 44 */
+  --text-h3: clamp(1.3125rem, 1.196rem + 0.476vw, 1.625rem);    /* 21 → 26 */
+  --text-body-lg: clamp(1.125rem, 1.079rem + 0.19vw, 1.25rem);  /* 18 → 20 */
+  --text-body: clamp(1rem, 0.977rem + 0.095vw, 1.0625rem);      /* 16 → 17 */
+  --text-body-sm: clamp(0.875rem, 0.852rem + 0.095vw, 0.9375rem); /* 14 → 15 */
+  --text-caption: 0.8125rem;                                    /* 13 */
+  --text-eyebrow: clamp(0.75rem, 0.727rem + 0.095vw, 0.8125rem); /* 12 → 13 */
+
+  --leading-display: 1.12;
+  --leading-heading: 1.18;
+  --leading-h3: 1.25;
+  --leading-body: 1.65;
+  --leading-tight: 1.4;
+
+  --tracking-heading: -0.02em;
+  --tracking-h3: -0.01em;
+  --tracking-eyebrow: 0.14em;
+
+  --measure: 65ch;
+
+  /* ── Espaço (grade de 4/8px) ─────────────────────── */
+  --space-1: 0.25rem;  /* 4 */
+  --space-2: 0.5rem;   /* 8 */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-6: 1.5rem;   /* 24 */
+  --space-8: 2rem;     /* 32 */
+  --space-10: 2.5rem;  /* 40 */
+  --space-12: 3rem;    /* 48 */
+  --space-16: 4rem;    /* 64 */
+  --space-20: 5rem;    /* 80 */
+
+  --section-y: clamp(3rem, 2.257rem + 3.048vw, 5rem); /* 48 → 80 */
+  --gutter: clamp(1rem, 0.629rem + 1.524vw, 2rem);    /* 16 → 32 */
+  --container: 72.5rem;                               /* 1160 */
+  --header-h: 4rem;                                   /* 64; 76 a partir de 960px */
+  --tap-min: 2.75rem;                                 /* 44 */
+
+  /* ── Raio, borda, sombra ─────────────────────────── */
+  --radius-pill: 9999px;
+  --radius-card: 24px;
+  --radius-panel: 16px;
+  --radius-image: 16px;
+  --radius-input: 12px;
+
+  --border-width: 1px;
+
+  --shadow-1: 0 1px 2px rgba(23, 38, 57, 0.06), 0 12px 32px rgba(23, 38, 57, 0.08); /* card do formulário, banner de cookies */
+  --shadow-2: 0 4px 12px rgba(15, 26, 40, 0.18), 0 12px 32px rgba(15, 26, 40, 0.16); /* botão flutuante de WhatsApp */
+
+  /* ── Movimento ───────────────────────────────────── */
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-slow: 400ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --stagger: 60ms;
+
+  /* ── Camadas ─────────────────────────────────────── */
+  --z-header: 50;
+  --z-fab: 60;
+  --z-cookie: 70;
+}
+
+@media (min-width: 960px) {
+  :root { --header-h: 4.75rem; }
+}

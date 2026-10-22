@@ -1,0 +1,22 @@
+{
+  "name": "lw-advocacia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Landing page do escritório LW Advocacia",
+  "scripts": {
+    "build": "node scripts/build.mjs && node scripts/check-oab.mjs",
+    "dev": "node scripts/dev.mjs",
+    "preview": "node scripts/preview.mjs",
+    "cms": "decap-server",
+    "check:oab": "node scripts/check-oab.mjs",
+    "gtm:container": "node scripts/gerar-gtm.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "decap-server": "^3.11.5",
+    "sharp": "^0.35.5"
+  }
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+{{> head}}
+</head>
+<body>
+<!--SPRITE-->
+{{> header}}
+<main id="conteudo" tabindex="-1">
+  <article class="section policy" id="topo">
+    <div class="container policy__inner">
+      <header class="section-head">
+        <p class="eyebrow">{{privacidade.eyebrow}}</p>
+        <h1 class="t-h1">{{privacidade.titulo}}</h1>
+        <p class="section-head__lead">Versão {{site.politicaVersao}}</p>
+      </header>
+      {{#if privacidade.aviso}}<p class="policy__notice"><svg class="icon icon--20 icon--accent" aria-hidden="true"><use href="#i-circle-alert"/></svg><span>{{privacidade.aviso}}</span></p>{{/if}}
+      {{#each privacidade.secoes}}<section class="policy__section">
+        <h2 class="t-h3">{{titulo}}</h2>
+        {{#each paragrafos}}<p>{{this}}</p>{{/each}}
+        {{#if itens}}<ul>{{#each itens}}<li>{{this}}</li>{{/each}}</ul>{{/if}}
+      </section>
+      {{/each}}
+      <p><a class="link-arrow" href="./#contato">Voltar para a página inicial<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></p>
+    </div>
+  </article>
+</main>
+{{> footer}}
+{{> fixos}}
+</body>
+</html>

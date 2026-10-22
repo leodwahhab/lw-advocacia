@@ -1,0 +1,18 @@
+<a class="fab" href="{{build.whatsappUrl}}" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp (abre em nova aba)" data-track="whatsapp" data-location="flutuante"><svg class="icon" aria-hidden="true"><use href="#i-message-circle"/></svg></a>
+<section class="cookie" role="region" aria-label="Aviso de cookies" data-cookie hidden>
+  <p>{{cookies.texto}} <a href="politica-de-privacidade.html">{{rodape.politicaRotulo}}</a>.</p>
+  <form class="cookie__panel" id="cookie-panel" data-cookie-panel hidden>
+    <fieldset>
+      <legend class="visually-hidden">{{cookies.preferencias}}</legend>
+      <label class="cookie__opt"><input type="checkbox" checked disabled><span><strong>{{cookies.necessariosTitulo}}</strong> {{cookies.necessariosTexto}}</span></label>
+      <label class="cookie__opt"><input type="checkbox" name="analytics"><span><strong>{{cookies.estatisticaTitulo}}</strong> {{cookies.estatisticaTexto}}</span></label>
+      <label class="cookie__opt"><input type="checkbox" name="marketing"><span><strong>{{cookies.marketingTitulo}}</strong> {{cookies.marketingTexto}}</span></label>
+    </fieldset>
+    <button class="btn btn--primary btn--sm" type="submit">{{cookies.salvar}}</button>
+  </form>
+  <div class="cookie__actions">
+    <button class="btn btn--primary btn--sm" type="button" data-cookie-accept>{{cookies.aceitar}}</button>
+    <button class="btn btn--secondary btn--sm" type="button" data-cookie-reject>{{cookies.recusar}}</button>
+    <button class="cookie__prefs" type="button" aria-expanded="false" aria-controls="cookie-panel" data-cookie-prefs>{{cookies.preferencias}}</button>
+  </div>
+</section>

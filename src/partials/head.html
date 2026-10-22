@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{page.titulo}}</title>
+<meta name="description" content="{{page.descricao}}">
+<link rel="canonical" href="{{page.canonical}}">
+<meta name="theme-color" content="#172639">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="{{site.nome}}">
+<meta property="og:title" content="{{page.titulo}}">
+<meta property="og:description" content="{{page.descricao}}">
+<meta property="og:url" content="{{page.canonical}}">
+<meta property="og:image" content="{{site.url}}/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo da {{site.nome}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{page.titulo}}">
+<meta name="twitter:description" content="{{page.descricao}}">
+<meta name="twitter:image" content="{{site.url}}/og-image.jpg">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.className+=" js"</script>
+<style>{{{build.criticalCss}}}</style>
+<link rel="stylesheet" href="{{build.cssHref}}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{build.cssHref}}"></noscript>
+{{{build.tracking}}}
+<script src="{{build.jsHref}}" defer></script>
+{{#if page.home}}<script type="application/ld+json">{{{build.jsonLd}}}</script>{{/if}}

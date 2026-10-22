@@ -1,0 +1,127 @@
+/* LW Advocacia — site.css
+   Só ajustes da página real, derivados dos tokens. Nada de cor, raio ou sombra novos.
+   Cada decisão está registrada em docs/decisoes.md. Seções marcadas [crítico] vão inline no <head>. */
+
+/* ── Fontes [crítico] ─────────────────────────────────────────────── */
+@font-face {
+  font-family: "Source Serif 4"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/source-serif-4-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Serif 4"; font-style: italic; font-weight: 400; font-display: swap;
+  src: url("../fonts/source-serif-4-italic-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter"; font-style: normal; font-weight: 400 500; font-display: swap;
+  src: url("../fonts/inter-latin.woff2") format("woff2");
+}
+/* Fallbacks com métricas ajustadas: enquanto a fonte da web não chega, o texto ocupa o mesmo espaço
+   e a troca não desloca o layout (CLS). Valores medidos no navegador (scripts em docs/decisoes.md, #31). */
+@font-face {
+  font-family: "Inter Fallback"; src: local("Arial");
+  size-adjust: 106.28%; ascent-override: 91.27%; descent-override: 22.58%; line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Source Serif 4 Fallback"; src: local("Times New Roman");
+  size-adjust: 100.5%; ascent-override: 103.48%; descent-override: 33.83%; line-gap-override: 0%;
+}
+:root {
+  --font-serif: "Source Serif 4", "Source Serif 4 Fallback", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", "Inter Fallback", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ── Base da página [crítico] ─────────────────────────────────────── */
+[hidden] { display: none !important; }
+html { scroll-padding-top: calc(var(--header-h) + var(--space-4)); -webkit-text-size-adjust: 100%; }
+main:focus { outline: none; }
+figure { margin: 0; }
+picture { display: block; height: 100%; }
+
+.skip-link {
+  position: absolute; z-index: calc(var(--z-cookie) + 1); left: var(--space-4); top: var(--space-3);
+  display: inline-flex; align-items: center; min-height: var(--tap-min); padding: 0 var(--space-4);
+  background: var(--color-bg); color: var(--color-text); border-radius: var(--radius-pill);
+  font-size: var(--text-body-sm); font-weight: 500; text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+
+/* O build entrega o logo já recortado na área útil + folga; a imagem ocupa o container inteiro. */
+.logo img { width: 100%; height: 100%; margin: 0; }
+
+/* Revelação do título: com JS, o h1 espera o is-ready para não piscar. Fallback de 3 s se o JS falhar. */
+.js .reveal:not(.is-ready) { opacity: 0; animation: lw-show 0s 3s forwards; }
+@keyframes lw-show { to { opacity: 1; } }
+.reveal em { font-style: italic; }
+@media (prefers-reduced-motion: reduce) { .js .reveal:not(.is-ready) { opacity: 1; animation: none; } }
+
+/* Telas estreitas (360px): o CTA do header encolhe para caber ao lado do logo. */
+@media (max-width: 400px) {
+  .site-header .btn--sm { padding: 0 var(--space-3); font-size: var(--text-caption); }
+}
+
+/* ── Sobre ────────────────────────────────────────────────────────── */
+.about__body .section-head { margin-bottom: 0; }
+.about__text { margin: 0; }
+
+/* ── Formulário ───────────────────────────────────────────────────── */
+.consent-wrap { display: grid; gap: var(--space-2); }
+.consent-wrap.is-invalid .consent { color: var(--color-error); }
+.consent-wrap.is-invalid .field__error { display: flex; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.form__status:empty { display: none; }
+.form-status a { color: inherit; font-weight: 500; }
+
+/* ── Mapa por fachada ─────────────────────────────────────────────── */
+/* Mesmo tratamento do .media-placeholder sobre marinho. O iframe só entra no clique. */
+.map-facade {
+  display: grid; place-items: center; align-content: center; gap: var(--space-3);
+  background: var(--navy-800); border: var(--border-width) dashed var(--navy-600);
+  color: var(--color-accent);
+}
+.map-facade.is-loaded { display: block; border: 0; }
+.map-facade iframe { display: block; width: 100%; height: 100%; border: 0; }
+
+/* ── Rodapé ───────────────────────────────────────────────────────── */
+.site-footer__lawyer { margin: 0; }
+/* .site-footer a pinta todo link de claro; o botão invertido precisa manter o texto marinho. */
+.site-footer .btn--inverse { color: var(--color-text); }
+/* Folga no fim da página para o botão flutuante não cobrir o aviso da OAB (56px + 16px de margem). */
+.site-footer { padding-bottom: calc(var(--space-8) + 72px + env(safe-area-inset-bottom, 0px)); }
+@media (min-width: 960px) { .site-footer { padding-bottom: calc(var(--space-10) + 56px); } }
+.site-footer .contact-line a { display: inline-block; padding-block: var(--space-2); margin-block: calc(-1 * var(--space-2)); text-decoration-color: var(--color-border-inverse); }
+.site-footer .contact-line a:hover { text-decoration-color: var(--color-accent); }
+.site-footer__links a, .link-button { display: inline-block; padding-block: var(--space-2); }
+.link-button {
+  background: none; border: 0; padding-inline: 0; color: inherit; font: inherit; cursor: pointer;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
+}
+
+/* ── Painel de preferências de cookies [crítico] ──────────────────── */
+.cookie__panel { display: grid; gap: var(--space-4); }
+.cookie__panel fieldset { display: grid; gap: var(--space-3); margin: 0; padding: 0; border: 0; }
+.cookie__opt { display: grid; grid-template-columns: 20px 1fr; gap: var(--space-3); align-items: start; color: var(--color-text-muted); cursor: pointer; }
+.cookie__opt input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--color-action); }
+.cookie__opt strong { display: block; font-weight: 500; color: var(--color-text); }
+.cookie__panel .btn { justify-self: start; }
+/* Ficha CookieBanner: Aceitar e Recusar com o mesmo tamanho (recusar não pode ser mais difícil). */
+.cookie__actions .btn { flex: 1 1 0; min-width: 7rem; }
+@media (min-width: 640px) { .cookie__actions .btn { flex: 0 0 7rem; } }
+/* Enquanto o formulário está na tela, o botão flutuante sai para não cobrir o envio. */
+.fab.is-hidden { visibility: hidden; }
+
+/* ── Política de Privacidade ──────────────────────────────────────── */
+.policy__inner { max-width: calc(46rem + 2 * var(--gutter)); }
+.policy__notice {
+  display: flex; gap: var(--space-3); align-items: flex-start; margin: 0;
+  padding: var(--space-4); border: var(--border-width) solid var(--color-border-strong); border-radius: var(--radius-input);
+  background: var(--color-bg-alt); font-size: var(--text-body-sm);
+}
+.policy__notice .icon { margin-top: 0.15em; }
+.policy__section { margin-top: var(--space-10); max-width: var(--measure); }
+.policy__section h2 { margin-bottom: var(--space-4); }
+.policy__section p, .policy__section li { color: var(--color-text-muted); }
+.policy__section p { margin: 0 0 var(--space-4); }
+.policy__section ul { margin: 0; padding-left: 1.25em; display: grid; gap: var(--space-2); }
+.policy__section li::marker { color: var(--color-accent-on-light); }
+.policy__section + p { margin-top: var(--space-12); }

@@ -1,0 +1,65 @@
+<!-- @dsCard group="Formulário" height=1080 subtitle="Card branco elevado, labels flutuantes, erro inline, consentimento LGPD e estados de envio" -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>ContactForm — preview</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  .demo { padding: 24px; display: grid; gap: 24px; max-width: 640px; }
+  .states { display: grid; gap: 12px; }
+</style>
+</head>
+<body>
+<div class="demo">
+  <div class="form-card">
+    <form class="form" action="/contato" method="post" novalidate>
+      <div class="field is-filled">
+        <input class="field__control" id="f-nome" name="nome" type="text" autocomplete="name" placeholder=" " value="Maria Exemplo" required>
+        <label class="field__label" for="f-nome">Nome</label>
+      </div>
+      <div class="form__row form__row--2">
+        <div class="field is-focus">
+          <input class="field__control" id="f-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required aria-describedby="f-tel-hint">
+          <label class="field__label" for="f-tel">Telefone com DDD</label>
+          <p class="field__hint" id="f-tel-hint">Estado foco: borda e anel marinho.</p>
+        </div>
+        <div class="field is-invalid">
+          <input class="field__control" id="f-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder=" " value="maria@" aria-invalid="true" aria-describedby="f-email-err">
+          <label class="field__label" for="f-email">E-mail</label>
+          <p class="field__error" id="f-email-err"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>Informe um e-mail completo, como nome@dominio.com.</p>
+        </div>
+      </div>
+      <div class="field">
+        <textarea class="field__control" id="f-caso" name="caso" placeholder=" " rows="4" aria-describedby="f-caso-hint"></textarea>
+        <label class="field__label" for="f-caso">Descreva brevemente o seu caso</label>
+        <p class="field__hint" id="f-caso-hint">Não inclua documentos ou dados sensíveis nesta mensagem.</p>
+      </div>
+      <div class="consent">
+        <input class="consent__box" id="f-lgpd" name="consentimento" type="checkbox" required>
+        <label for="f-lgpd">Concordo com o tratamento dos meus dados para retorno do contato, conforme a <a href="#">Política de Privacidade</a>.</label>
+      </div>
+      <button class="btn btn--primary btn--block" type="submit">Enviar mensagem</button>
+    </form>
+  </div>
+
+  <div class="states">
+    <p class="eyebrow">Estados de envio</p>
+    <button class="btn btn--primary btn--block" type="button" aria-busy="true" aria-disabled="true">Enviando…</button>
+    <div class="form-status form-status--success" role="status">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+      <div><strong>Mensagem enviada.</strong>Retornaremos pelo telefone ou e-mail informado.</div>
+    </div>
+    <div class="form-status form-status--error" role="alert">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+      <div><strong>Não foi possível enviar.</strong>Verifique a conexão e tente de novo, ou fale pelo WhatsApp.</div>
+    </div>
+    <div class="consent is-invalid">
+      <input class="consent__box" id="f-lgpd-err" type="checkbox" aria-invalid="true" aria-describedby="f-lgpd-err-msg">
+      <label for="f-lgpd-err">Concordo com o tratamento dos meus dados, conforme a <a href="#">Política de Privacidade</a>.</label>
+      <span></span><p class="field__error" id="f-lgpd-err-msg" style="display:flex">Marque esta opção para enviar.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

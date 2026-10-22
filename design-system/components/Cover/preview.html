@@ -1,0 +1,43 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400&family=Inter:wght@400&display=swap">
+<style>
+  html, body { margin: 0; background: var(--color-bg); }
+  .cover { position: relative; width: 960px; height: 288px; }
+  svg { position: absolute; inset: 0; display: block; }
+  .navy { fill: var(--navy-900); }
+  .gold { fill: var(--gold-400); }
+  .slate { fill: var(--slate-500); }
+  .tint { fill: var(--parchment-200); }
+  .rule { stroke: var(--gold-400); stroke-width: 1; }
+  .name { position: absolute; left: 40px; bottom: 76px; margin: 0; max-width: 440px;
+          font-family: var(--font-serif); font-weight: 400; font-size: 64px; line-height: 0.95; letter-spacing: -0.02em; color: var(--color-text); }
+  .tag { position: absolute; left: 40px; bottom: 40px; margin: 0; max-width: 440px;
+         font-family: var(--font-sans); font-size: 14px; line-height: 20px; color: var(--color-text-muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+  <!--
+    Blocos: navy-900 288×288 (laje), gold-400 96×96, parchment-200 192×192, slate-500 96×96.
+    Arranjo: uma laje marinho com satélites à direita, como o header e o rodapé emolduram a página.
+    Padrão: três filetes dourados cruzando a laje ("bordas, não sombras"; o dourado é ornamento sobre o marinho).
+    Escalas: passos de 96 (space-12 × 2), filetes a cada 48 (space-12), cantos retos como os blocos da página.
+  -->
+  <svg viewBox="0 0 960 288" width="960" height="288" aria-hidden="true">
+    <rect class="navy" x="480" y="0" width="288" height="288"/>
+    <rect class="tint" x="768" y="0" width="192" height="192"/>
+    <rect class="gold" x="768" y="0" width="96" height="96"/>
+    <rect class="slate" x="864" y="192" width="96" height="96"/>
+    <line class="rule" x1="480" x2="768" y1="96.5" y2="96.5"/>
+    <line class="rule" x1="480" x2="768" y1="144.5" y2="144.5"/>
+    <line class="rule" x1="480" x2="768" y1="192.5" y2="192.5"/>
+  </svg>
+  <p class="name">LW Advocacia</p>
+  <p class="tag">Design system da landing page do escritório.</p>
+</div>
+</body>
+</html>

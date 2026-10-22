@@ -1,0 +1,10 @@
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header class="site-header on-dark" data-header>
+  <div class="container site-header__inner">
+    <a class="logo" href="{{page.base}}#topo" aria-label="{{site.nome}}, página inicial">{{{build.logoHeader}}}</a>
+    <nav class="site-nav" aria-label="Seções">
+      {{#each header.nav}}<a href="{{page.base}}{{ancora}}">{{rotulo}}</a>{{/each}}
+    </nav>
+    <a class="btn btn--inverse btn--sm" href="{{page.base}}#contato">{{header.cta}}</a>
+  </div>
+</header>

@@ -1,0 +1,13 @@
+# Dependências e saída do build (o GitHub Actions gera o dist/ no deploy)
+node_modules/
+dist/
+*.log
+
+# Ferramentas locais de desenvolvimento (não fazem parte do site)
+.playwright-mcp/
+.claude/
+.agents/
+skills-lock.json
+
+# Capturas de sites de terceiros usadas só como referência de movimento
+refs/

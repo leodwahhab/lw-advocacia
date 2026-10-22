@@ -1,0 +1,298 @@
+# Decap CMS: painel de edição do site da LW Advocacia.
+# Tudo o que o painel salva vai para content/site.json; o build (npm run build) gera o site a partir dele.
+
+# ── Uso local ────────────────────────────────────────────────────────────────
+# Com `npm run dev` (ou `npm run cms` + servidor), o painel em http://localhost:8080/admin/
+# conversa com o decap-server, que grava direto nos arquivos desta pasta. Sem login.
+local_backend: true
+
+# ── Hospedagem (quando o site for publicado) ─────────────────────────────────
+# O Decap exige um bloco `backend`. O valor abaixo não é usado localmente (local_backend tem prioridade).
+# Ao publicar, escolha UMA das opções e ajuste (passo a passo em docs/publicacao.md):
+#
+# Opção 1: Netlify + Git Gateway (login por e-mail, sem conta no GitHub para quem edita)
+backend:
+  name: git-gateway
+  branch: main
+#
+# Opção 2: GitHub direto (quem edita precisa de conta no GitHub com acesso ao repositório)
+# backend:
+#   name: github
+#   repo: usuario/lw-advocacia
+#   branch: main
+#   base_url: https://seu-servidor-oauth.exemplo.com   # só fora da Netlify
+#
+# Fluxo de aprovação (rascunho → revisão → publicado), opcional:
+# publish_mode: editorial_workflow
+
+locale: pt
+site_url: http://localhost:8080
+display_url: http://localhost:8080
+logo_url: /apple-touch-icon.png
+
+# Fotos enviadas pelo painel vão para assets/uploads; o build gera as versões otimizadas.
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: site
+    label: Site
+    editor:
+      preview: false
+    files:
+      - name: conteudo
+        label: Conteúdo da página
+        file: content/site.json
+        format: json
+        description: Textos, fotos e contatos da página inicial e da Política de Privacidade. Depois de salvar, rode o build para atualizar o site.
+        fields:
+          # ── Configurações ─────────────────────────────────────────────
+          - label: Configurações do site
+            name: site
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Nome do escritório, name: nome, widget: string }
+              - { label: "Endereço do site (com https:// e sem barra no final)", name: url, widget: string, hint: "Ex.: https://lwadvocacia.com.br. Usado no Google, no compartilhamento e no sitemap." }
+              - { label: ID do Google Tag Manager, name: gtmId, widget: string, hint: "Formato GTM-XXXXXXX. Veja docs/configurar-gtm.md.", pattern: ['^GTM-[A-Z0-9]+$', "Use o formato GTM-XXXXXXX"] }
+              - { label: URL do formulário (Apps Script), name: formEndpoint, widget: string, hint: "URL terminada em /exec. Veja docs/configurar-formulario.md." }
+              - { label: Versão da Política de Privacidade, name: politicaVersao, widget: string, hint: "Mude sempre que alterar a política. Fica registrada em cada envio do formulário." }
+
+          - label: Google e compartilhamento (SEO)
+            name: seo
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título da página inicial, name: titulo, widget: string, hint: "Até 60 caracteres. Aparece na aba do navegador e no Google." }
+              - { label: Descrição da página inicial, name: descricao, widget: text, hint: "Até 155 caracteres. Aparece abaixo do título no Google." }
+              - { label: Título da Política de Privacidade, name: tituloPolitica, widget: string }
+              - { label: Descrição da Política de Privacidade, name: descricaoPolitica, widget: text }
+
+          # ── Pessoas e contato ─────────────────────────────────────────
+          - label: Advogado(a)
+            name: advogado
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Nome completo, name: nome, widget: string }
+              - { label: Cargo, name: cargo, widget: select, options: [Advogada, Advogado], hint: "Usado nas informações para o Google." }
+              - { label: Número da OAB, name: oab, widget: string, hint: "Ex.: OAB/SP 123.456. É obrigatório e fica visível no site." }
+              - { label: Formação, name: formacao, widget: string, hint: "Ex.: Direito · Universidade de São Paulo · 2012" }
+              - { label: Foto (seção Sobre), name: foto, widget: image, choose_url: false, hint: "Retrato vertical (4:5), com pelo menos 1200 px de largura." }
+              - { label: Descrição da foto (acessibilidade), name: fotoAlt, widget: string, hint: "Ex.: Retrato de Ana Souza no escritório." }
+
+          - label: Contato
+            name: contato
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Telefone (como aparece no site), name: telefone, widget: string, hint: "Ex.: (11) 3123-4567" }
+              - { label: Telefone para discagem, name: telefoneLink, widget: string, hint: "Com +55 e DDD, só números. Ex.: +551131234567" }
+              - { label: WhatsApp, name: whatsapp, widget: string, hint: "55 + DDD + número, só números. Ex.: 5511912345678", pattern: ['^\d{12,13}$', "Use só números: 55 + DDD + número"] }
+              - { label: Mensagem inicial do WhatsApp, name: whatsappMensagem, widget: text, hint: "Texto que já aparece escrito quando a pessoa abre o WhatsApp." }
+              - { label: E-mail, name: email, widget: string }
+              - label: Endereço
+                name: endereco
+                widget: object
+                fields:
+                  - { label: "Rua, número e sala", name: logradouro, widget: string }
+                  - { label: Bairro, name: bairro, widget: string }
+                  - { label: Cidade, name: cidade, widget: string }
+                  - { label: UF, name: uf, widget: string }
+                  - { label: CEP, name: cep, widget: string }
+              - { label: Horário de atendimento (texto), name: horario, widget: string }
+              - { label: Abre às (para o Google), name: horarioAbre, widget: string, hint: "Formato 09:00" }
+              - { label: Fecha às (para o Google), name: horarioFecha, widget: string, hint: "Formato 18:00" }
+              - { label: "Link do botão Ver no mapa", name: mapaLink, widget: string, hint: "No Google Maps: Compartilhar > Copiar link." }
+              - { label: Endereço do mapa incorporado, name: mapaEmbed, widget: string, hint: "No Google Maps: Compartilhar > Incorporar um mapa > copie só o endereço que está dentro de src=\"...\"." }
+
+          - label: Redes sociais
+            name: redes
+            widget: list
+            collapsed: true
+            summary: "{{fields.nome}}"
+            fields:
+              - { label: Nome, name: nome, widget: string }
+              - { label: Endereço do perfil, name: url, widget: string }
+              - { label: Ícone, name: icone, widget: select, options: [instagram, linkedin, facebook, youtube] }
+
+          # ── Seções da página, na ordem em que aparecem ────────────────
+          - label: Topo (menu)
+            name: header
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Botão do topo, name: cta, widget: string }
+              - label: Itens do menu (até 4)
+                name: nav
+                widget: list
+                max: 4
+                summary: "{{fields.rotulo}}"
+                fields:
+                  - { label: Texto, name: rotulo, widget: string }
+                  - { label: Seção, name: ancora, widget: select, options: [{ label: Áreas de atuação, value: "#atuacao" }, { label: Sobre, value: "#sobre" }, { label: Como funciona, value: "#como-funciona" }, { label: Dúvidas, value: "#duvidas" }, { label: Contato, value: "#contato" }] }
+
+          - label: 1. Destaque (hero)
+            name: hero
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Texto pequeno acima do título, name: eyebrow, widget: string }
+              - { label: Título principal, name: titulo, widget: string, hint: "Uma palavra entre *asteriscos* aparece em itálico. Ex.: Orientação jurídica explicada com *clareza*" }
+              - { label: Subtítulo, name: subtitulo, widget: text }
+              - { label: Botão do WhatsApp, name: ctaPrimario, widget: string }
+              - { label: Botão do telefone, name: ctaSecundario, widget: string }
+              - { label: Foto, name: foto, widget: image, choose_url: false, hint: "Retrato vertical (4:5), com pelo menos 1200 px de largura." }
+              - { label: Descrição da foto (acessibilidade), name: fotoAlt, widget: string }
+
+          - label: 2. Áreas de atuação
+            name: areas
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Texto pequeno acima do título, name: eyebrow, widget: string }
+              - { label: Título, name: titulo, widget: string }
+              - { label: Introdução, name: lead, widget: text }
+              - { label: Texto do link dos cards, name: linkRotulo, widget: string }
+              - label: Áreas
+                name: itens
+                widget: list
+                summary: "{{fields.titulo}}"
+                fields:
+                  - { label: Nome da área, name: titulo, widget: string }
+                  - { label: Descrição curta, name: descricao, widget: text, hint: "Uma ou duas linhas." }
+                  - label: Ícone
+                    name: icone
+                    widget: select
+                    options:
+                      - { label: Pessoas (família), value: users-round }
+                      - { label: Pasta (trabalhista), value: briefcase }
+                      - { label: Documento (cível), value: file-text }
+                      - { label: Calendário (previdenciário), value: calendar-clock }
+                      - { label: Sacola (consumidor), value: shopping-bag }
+                      - { label: Prédio (empresarial), value: building-2 }
+                      - { label: Casa (imobiliário), value: house }
+                      - { label: "Escudo (proteção, compliance)", value: shield-check }
+
+          - label: 3. Sobre o escritório
+            name: sobre
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Texto pequeno acima do título, name: eyebrow, widget: string }
+              - { label: Título, name: titulo, widget: string }
+              - { label: Texto de apresentação, name: texto, widget: text }
+              - { label: Rótulo do selo da OAB, name: seloRotulo, widget: string }
+              - { label: Diferenciais, name: diferenciais, widget: list, field: { label: Diferencial, name: item, widget: string }, hint: "Fatos verificáveis. Sem 'melhor', sem resultados ou números de processos." }
+
+          - label: 4. Como funciona
+            name: comoFunciona
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Texto pequeno acima do título, name: eyebrow, widget: string }
+              - { label: Título, name: titulo, widget: string }
+              - { label: Introdução, name: lead, widget: text }
+              - label: Passos
+                name: passos
+                widget: list
+                min: 2
+                max: 4
+                summary: "{{fields.titulo}}"
+                fields:
+                  - { label: Título do passo, name: titulo, widget: string }
+                  - { label: Descrição, name: texto, widget: text }
+
+          - label: 5. Perguntas frequentes
+            name: faq
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Texto pequeno acima do título, name: eyebrow, widget: string }
+              - { label: Título, name: titulo, widget: string }
+              - label: Perguntas
+                name: itens
+                widget: list
+                summary: "{{fields.pergunta}}"
+                fields:
+                  - { label: Pergunta, name: pergunta, widget: string }
+                  - { label: Resposta, name: resposta, widget: text }
+
+          - label: 6. Contato e formulário
+            name: contatoSecao
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Texto pequeno acima do título, name: eyebrow, widget: string }
+              - { label: Título, name: titulo, widget: string }
+              - { label: Introdução, name: lead, widget: text }
+              - { label: Botão do WhatsApp, name: ctaWhatsapp, widget: string }
+              - label: Textos do formulário
+                name: form
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: Campo nome, name: nome, widget: string }
+                  - { label: Campo telefone, name: telefone, widget: string }
+                  - { label: Campo e-mail, name: email, widget: string }
+                  - { label: Campo descrição do caso, name: caso, widget: string }
+                  - { label: Dica abaixo da descrição, name: casoDica, widget: string }
+                  - { label: Texto do consentimento (antes do link da política), name: consentimento, widget: text }
+                  - { label: Botão de envio, name: botao, widget: string }
+                  - { label: Botão durante o envio, name: botaoEnviando, widget: string }
+                  - { label: Sucesso (título), name: sucessoTitulo, widget: string }
+                  - { label: Sucesso (texto), name: sucessoTexto, widget: text }
+                  - { label: Erro no envio (título), name: erroTitulo, widget: string }
+                  - { label: Erro no envio (texto), name: erroTexto, widget: text }
+                  - { label: Aviso sem JavaScript, name: semJs, widget: text }
+                  - { label: Erro do nome, name: erroNome, widget: string }
+                  - { label: Erro do telefone, name: erroTelefone, widget: string }
+                  - { label: Erro do e-mail, name: erroEmail, widget: string }
+                  - { label: Erro da descrição, name: erroCaso, widget: string }
+                  - { label: Erro do consentimento, name: erroConsentimento, widget: string }
+
+          - label: 7. Rodapé
+            name: rodape
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Título da coluna de contato, name: contatoTitulo, widget: string }
+              - { label: Título da coluna do mapa, name: mapaTitulo, widget: string }
+              - { label: Botão do mapa, name: mapaBotao, widget: string }
+              - { label: Aviso informativo da OAB, name: avisoOab, widget: text }
+              - { label: Link da Política de Privacidade, name: politicaRotulo, widget: string }
+              - { label: Link das preferências de cookies, name: cookiesRotulo, widget: string }
+
+          - label: Aviso de cookies
+            name: cookies
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Texto (antes do link da política), name: texto, widget: text }
+              - { label: Botão aceitar, name: aceitar, widget: string }
+              - { label: Botão recusar, name: recusar, widget: string }
+              - { label: Botão preferências, name: preferencias, widget: string }
+              - { label: Botão salvar preferências, name: salvar, widget: string }
+              - { label: Necessários (título), name: necessariosTitulo, widget: string }
+              - { label: Necessários (texto), name: necessariosTexto, widget: string }
+              - { label: Estatística (título), name: estatisticaTitulo, widget: string }
+              - { label: Estatística (texto), name: estatisticaTexto, widget: string }
+              - { label: Marketing (título), name: marketingTitulo, widget: string }
+              - { label: Marketing (texto), name: marketingTexto, widget: string }
+
+          - label: Política de Privacidade
+            name: privacidade
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Texto pequeno acima do título, name: eyebrow, widget: string }
+              - { label: Título, name: titulo, widget: string }
+              - { label: Aviso no topo, name: aviso, widget: text, required: false, hint: "Apague depois da revisão jurídica." }
+              - label: Seções
+                name: secoes
+                widget: list
+                summary: "{{fields.titulo}}"
+                fields:
+                  - { label: Título da seção, name: titulo, widget: string }
+                  - { label: Parágrafos, name: paragrafos, widget: list, required: false, field: { label: Parágrafo, name: p, widget: text } }
+                  - { label: Itens em lista, name: itens, widget: list, required: false, field: { label: Item, name: i, widget: text } }

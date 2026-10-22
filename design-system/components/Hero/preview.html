@@ -1,0 +1,51 @@
+<!-- @dsCard group="Conteúdo" height=720 subtitle="Título com revelação por palavra, CTAs e foto em 2 colunas no desktop" -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Hero — preview</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+</head>
+<body>
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow">Advocacia em Cidade/UF</p>
+      <h1 class="t-display reveal" id="hero-title">Título de impacto com uma palavra em <em>destaque</em></h1>
+      <p class="hero__lead">Subtítulo curto que explica o que o escritório faz e para quem.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#contato">Agendar conversa</a>
+        <a class="btn btn--whatsapp" href="#"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>WhatsApp</a>
+      </div>
+      <p class="hero__meta">Nome do(a) advogado(a) · OAB/UF 000.000</p>
+    </div>
+    <figure class="hero__media" style="margin:0">
+      <div class="media-placeholder">Retrato do(a) advogado(a)<br>4:5 no desktop · 4:3 no celular</div>
+    </figure>
+  </div>
+</section>
+<script>
+  (function () {
+    var el = document.getElementById('hero-title');
+    var i = 0;
+    (function wrap(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+        if (child.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            var s = document.createElement('span');
+            s.className = 'w'; s.style.setProperty('--i', i++); s.textContent = part;
+            frag.appendChild(s);
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1) { wrap(child); }
+      });
+    })(el);
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    requestAnimationFrame(function () { el.classList.add('is-ready'); });
+  })();
+</script>
+</body>
+</html>

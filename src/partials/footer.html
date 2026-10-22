@@ -1,0 +1,32 @@
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="site-footer__col">
+        <a class="logo logo--footer" href="{{page.base}}#topo" aria-label="{{site.nome}}, voltar ao topo">{{{build.logoFooter}}}</a>
+        <p class="site-footer__lawyer">{{advogado.nome}}<br><span class="t-muted">{{advogado.oab}}</span></p>
+        {{#if redes}}<ul class="social" aria-label="Redes sociais">
+          {{#each redes}}<li><a href="{{url}}" target="_blank" rel="noopener" aria-label="{{nome}} (abre em nova aba)"><svg class="icon" aria-hidden="true"><use href="#i-{{icone}}"/></svg></a></li>{{/each}}
+        </ul>{{/if}}
+      </div>
+      <div class="site-footer__col">
+        <p class="eyebrow">{{rodape.contatoTitulo}}</p>
+        <div class="contact-line"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg><address>{{contato.endereco.logradouro}}<br>{{contato.endereco.bairro}} · {{contato.endereco.cidade}}/{{contato.endereco.uf}} · {{contato.endereco.cep}}</address></div>
+        <p class="contact-line"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><a href="{{build.telUrl}}" data-track="phone" data-location="rodape">{{contato.telefone}}</a></p>
+        <p class="contact-line"><svg class="icon" aria-hidden="true"><use href="#i-message-circle"/></svg><a href="{{build.whatsappUrl}}" target="_blank" rel="noopener" data-track="whatsapp" data-location="rodape">WhatsApp</a></p>
+        <p class="contact-line"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:{{contato.email}}">{{contato.email}}</a></p>
+        <p class="contact-line"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><span>{{contato.horario}}</span></p>
+      </div>
+      <div class="site-footer__col">
+        <p class="eyebrow">{{rodape.mapaTitulo}}</p>
+        <div class="map-slot map-facade" data-map="{{contato.mapaEmbed}}" data-map-title="Mapa: {{contato.endereco.logradouro}}">
+          <svg class="icon icon--32" aria-hidden="true"><use href="#i-map-pin"/></svg>
+          <a class="btn btn--inverse btn--sm" href="{{contato.mapaLink}}" target="_blank" rel="noopener" data-map-open>{{rodape.mapaBotao}}</a>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p class="oab-notice">{{rodape.avisoOab}}</p>
+      <p class="site-footer__links"><a href="politica-de-privacidade.html">{{rodape.politicaRotulo}}</a> · <button class="link-button" type="button" data-cookie-open hidden>{{rodape.cookiesRotulo}}</button><span data-cookie-open-sep hidden> · </span>© {{build.ano}} {{site.nome}}</p>
+    </div>
+  </div>
+</footer>

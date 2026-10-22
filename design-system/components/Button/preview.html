@@ -1,0 +1,62 @@
+<!-- @dsCard group="Ações" height=560 subtitle="Primário, secundário, WhatsApp, inverso e link com seta, em todos os estados" -->
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Button — preview</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+  .demo { padding: 24px; display: grid; gap: 20px; }
+  .row { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: center; }
+  .row > p { margin: 0; }
+  .states { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .dark { padding: 24px; display: grid; gap: 20px; }
+</style>
+</head>
+<body>
+<div class="demo">
+  <div class="row"><p class="eyebrow">Primário</p>
+    <div class="states">
+      <button class="btn btn--primary" type="button">Agendar conversa</button>
+      <button class="btn btn--primary is-hover" type="button">Hover</button>
+      <button class="btn btn--primary is-focus" type="button">Foco</button>
+      <button class="btn btn--primary is-active" type="button">Ativo</button>
+      <button class="btn btn--primary" type="button" disabled>Desabilitado</button>
+      <button class="btn btn--primary" type="button" aria-busy="true" aria-disabled="true">Enviando…</button>
+    </div>
+  </div>
+  <div class="row"><p class="eyebrow">Secundário</p>
+    <div class="states">
+      <a class="btn btn--secondary" href="#"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Ligar</a>
+      <a class="btn btn--secondary is-hover" href="#">Hover</a>
+      <a class="btn btn--secondary is-focus" href="#">Foco</a>
+      <a class="btn btn--secondary is-active" href="#">Ativo</a>
+      <button class="btn btn--secondary" type="button" disabled>Desabilitado</button>
+    </div>
+  </div>
+  <div class="row"><p class="eyebrow">WhatsApp</p>
+    <div class="states">
+      <a class="btn btn--whatsapp" href="#"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Conversar no WhatsApp</a>
+      <a class="btn btn--whatsapp is-hover" href="#"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Hover</a>
+      <a class="btn btn--whatsapp is-focus" href="#"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Foco</a>
+    </div>
+  </div>
+  <div class="row"><p class="eyebrow">Link</p>
+    <div class="states">
+      <a class="link-arrow" href="#">Saiba mais<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      <a class="link-arrow is-hover" href="#">Hover<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</div>
+<div class="dark on-dark">
+  <div class="row"><p class="eyebrow">Inverso</p>
+    <div class="states">
+      <a class="btn btn--inverse" href="#">Fale conosco</a>
+      <a class="btn btn--inverse is-hover" href="#">Hover</a>
+      <a class="btn btn--inverse is-focus" href="#">Foco</a>
+      <a class="link-arrow" href="#">Link sobre marinho<svg class="icon icon--accent" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

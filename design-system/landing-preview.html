@@ -1,0 +1,348 @@
+<title>LW Advocacia Landing</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<link rel="stylesheet" href="tokens.css" id="css-tokens">
+<link rel="stylesheet" href="components.css" id="css-components">
+<style>
+  /* Moldura da prévia: só tema claro, como o sistema */
+  .pv-body {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 24px 48px;
+  }
+  .pv-bar { max-width: 1600px; margin: 0 auto 24px; display: grid; gap: 6px; }
+  .pv-bar h1 { margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: 1.75rem; letter-spacing: -0.02em; line-height: 1.2; }
+  .pv-bar p { margin: 0; color: var(--color-text-muted); font-size: 0.9375rem; max-width: 70ch; }
+  .pv-stage { max-width: 1600px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+  .pv-device { display: grid; gap: 10px; min-width: 0; }
+  .pv-label { margin: 0; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-eyebrow); }
+  .pv-frame { border: 1px solid var(--color-border-strong); border-radius: 20px; overflow: hidden; background: var(--color-bg); }
+  .pv-screen { position: relative; container: pv / inline-size; background: var(--color-bg); }
+  .pv-screen .site-header { position: relative; top: auto; }
+  .pv-fold { position: absolute; inset: 0 0 auto; pointer-events: none; }
+  .pv-fold > * { pointer-events: auto; }
+  .pv-fold .fab, .pv-fold .cookie { position: absolute; }
+  .pv-screen[data-w="1440"] .lw-page { --header-h: 4.75rem; }
+  .pv-screen .faq { max-width: 48rem; }
+</style>
+
+<div class="pv-body">
+  <header class="pv-bar">
+    <p class="pv-label">Design system · prévia de composição</p>
+    <h1>Landing LW Advocacia</h1>
+    <p>Hero, áreas de atuação, sobre, como funciona, FAQ, formulário e rodapé, aplicando os tokens e componentes do sistema. Textos e fotos são marcadores neutros.</p>
+  </header>
+
+  <main class="pv-stage" id="stage">
+    <section class="pv-device" data-w="390">
+      <p class="pv-label">Celular · 390px</p>
+      <div class="pv-frame"><div class="pv-screen" data-w="390" data-fold="844"></div></div>
+    </section>
+    <section class="pv-device" data-w="1440">
+      <p class="pv-label">Desktop · 1440px <span id="pv-scale"></span></p>
+      <div class="pv-frame"><div class="pv-screen" data-w="1440" data-fold="900"></div></div>
+    </section>
+  </main>
+</div>
+
+<template id="landing">
+  <div class="lw-page">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+      <symbol id="i-msg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></symbol>
+      <symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.3V14"/><circle cx="16" cy="16" r="6"/></symbol>
+      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+      <symbol id="i-building" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></symbol>
+      <symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+    </svg>
+
+    <header class="site-header on-dark">
+      <div class="container site-header__inner">
+        <a class="logo" href="#topo" aria-label="LW Advocacia, página inicial"><img class="pv-logo" src="assets/lw-advocacia-logo-wordmark.jpg" alt="" width="1376" height="768"></a>
+        <nav class="site-nav" aria-label="Seções">
+          <a href="#atuacao">Atuação</a><a href="#sobre">Sobre</a><a href="#como-funciona">Como funciona</a><a href="#duvidas">Dúvidas</a>
+        </nav>
+        <a class="btn btn--inverse btn--sm" href="#contato">Fale conosco</a>
+      </div>
+    </header>
+
+    <main id="topo">
+      <section class="hero">
+        <div class="container hero__grid">
+          <div class="hero__copy">
+            <p class="eyebrow">Advocacia em Cidade/UF</p>
+            <h1 class="t-display reveal">Título de impacto com uma palavra em <em>destaque</em></h1>
+            <p class="hero__lead">Subtítulo curto que explica o que o escritório faz e para quem.</p>
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="#contato">Agendar conversa</a>
+              <a class="btn btn--whatsapp" href="#contato"><svg class="icon"><use href="#i-msg"/></svg>WhatsApp</a>
+            </div>
+            <p class="hero__meta">Nome do(a) advogado(a) · OAB/UF 000.000</p>
+          </div>
+          <figure class="hero__media" style="margin:0"><div class="media-placeholder">Retrato do(a) advogado(a)<br>4:3 no celular · 4:5 no desktop</div></figure>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="atuacao">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow">Áreas de atuação</p>
+            <h2 class="t-h2">Título da seção de áreas</h2>
+            <p class="section-head__lead">Frase curta que apresenta as áreas.</p>
+          </header>
+          <div class="card-grid">
+            <article class="practice-card"><svg class="icon icon--32 practice-card__icon"><use href="#i-users"/></svg><h3 class="t-h3 practice-card__title">Família</h3><p class="practice-card__text">Descrição curta da área, em uma ou duas linhas.</p><a class="link-arrow" href="#contato">Saiba mais<span class="visually-hidden"> sobre Família</span><svg class="icon"><use href="#i-arrow"/></svg></a></article>
+            <article class="practice-card"><svg class="icon icon--32 practice-card__icon"><use href="#i-briefcase"/></svg><h3 class="t-h3 practice-card__title">Trabalhista</h3><p class="practice-card__text">Descrição curta da área, em uma ou duas linhas.</p><a class="link-arrow" href="#contato">Saiba mais<span class="visually-hidden"> sobre Trabalhista</span><svg class="icon"><use href="#i-arrow"/></svg></a></article>
+            <article class="practice-card"><svg class="icon icon--32 practice-card__icon"><use href="#i-file"/></svg><h3 class="t-h3 practice-card__title">Cível</h3><p class="practice-card__text">Descrição curta da área, em uma ou duas linhas.</p><a class="link-arrow" href="#contato">Saiba mais<span class="visually-hidden"> sobre Cível</span><svg class="icon"><use href="#i-arrow"/></svg></a></article>
+            <article class="practice-card"><svg class="icon icon--32 practice-card__icon"><use href="#i-calendar"/></svg><h3 class="t-h3 practice-card__title">Previdenciário</h3><p class="practice-card__text">Descrição curta da área, em uma ou duas linhas.</p><a class="link-arrow" href="#contato">Saiba mais<span class="visually-hidden"> sobre Previdenciário</span><svg class="icon"><use href="#i-arrow"/></svg></a></article>
+            <article class="practice-card"><svg class="icon icon--32 practice-card__icon"><use href="#i-bag"/></svg><h3 class="t-h3 practice-card__title">Consumidor</h3><p class="practice-card__text">Descrição curta da área, em uma ou duas linhas.</p><a class="link-arrow" href="#contato">Saiba mais<span class="visually-hidden"> sobre Consumidor</span><svg class="icon"><use href="#i-arrow"/></svg></a></article>
+            <article class="practice-card"><svg class="icon icon--32 practice-card__icon"><use href="#i-building"/></svg><h3 class="t-h3 practice-card__title">Empresarial</h3><p class="practice-card__text">Descrição curta da área, em uma ou duas linhas.</p><a class="link-arrow" href="#contato">Saiba mais<span class="visually-hidden"> sobre Empresarial</span><svg class="icon"><use href="#i-arrow"/></svg></a></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="sobre">
+        <div class="container about">
+          <figure class="about__media" style="margin:0"><div class="media-placeholder">Retrato do(a) advogado(a)<br>4:5 · luz natural</div></figure>
+          <div class="about__body">
+            <header class="section-head" style="margin-bottom:0">
+              <p class="eyebrow">Sobre o escritório</p>
+              <h2 class="t-h2">Título da seção Sobre</h2>
+            </header>
+            <div>
+              <h3 class="t-h3 about__name">Nome do(a) Advogado(a)</h3>
+              <p class="about__role t-body-sm">Formação · Instituição · Ano</p>
+            </div>
+            <p class="oab-id"><span class="oab-id__label">Inscrição na OAB</span><span class="oab-id__number">OAB/UF 000.000</span></p>
+            <p class="prose t-muted" style="margin:0">Parágrafo curto de apresentação do escritório, com até 65 caracteres por linha.</p>
+            <ul class="check-list">
+              <li><svg class="icon"><use href="#i-check"/></svg><span>Diferencial do atendimento</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span>Outro diferencial, em uma linha</span></li>
+              <li><svg class="icon"><use href="#i-check"/></svg><span>Terceiro diferencial</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--alt" id="como-funciona">
+        <div class="container">
+          <header class="section-head">
+            <p class="eyebrow">Como funciona</p>
+            <h2 class="t-h2">Título da seção de etapas</h2>
+          </header>
+          <ol class="steps">
+            <li class="steps__item"><span class="steps__num" aria-hidden="true">1</span><h3 class="steps__title">Contato</h3><p class="steps__text">Descrição curta da etapa.</p></li>
+            <li class="steps__item"><span class="steps__num" aria-hidden="true">2</span><h3 class="steps__title">Análise do caso</h3><p class="steps__text">Descrição curta da etapa.</p></li>
+            <li class="steps__item"><span class="steps__num" aria-hidden="true">3</span><h3 class="steps__title">Estratégia</h3><p class="steps__text">Descrição curta da etapa.</p></li>
+            <li class="steps__item"><span class="steps__num" aria-hidden="true">4</span><h3 class="steps__title">Acompanhamento</h3><p class="steps__text">Descrição curta da etapa.</p></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="duvidas">
+        <div class="container">
+          <header class="section-head section-head--center">
+            <p class="eyebrow">Dúvidas frequentes</p>
+            <h2 class="t-h2">Título da seção de perguntas</h2>
+          </header>
+          <div class="faq faq--center">
+            <details class="faq__item" open><summary class="faq__q">Primeira pergunta frequente?<svg class="icon"><use href="#i-plus"/></svg></summary><div class="faq__a"><p>Resposta curta e objetiva, em texto corrido.</p></div></details>
+            <details class="faq__item"><summary class="faq__q">Segunda pergunta frequente?<svg class="icon"><use href="#i-plus"/></svg></summary><div class="faq__a"><p>Resposta curta e objetiva.</p></div></details>
+            <details class="faq__item"><summary class="faq__q">Terceira pergunta frequente?<svg class="icon"><use href="#i-plus"/></svg></summary><div class="faq__a"><p>Resposta curta e objetiva.</p></div></details>
+            <details class="faq__item"><summary class="faq__q">Quarta pergunta frequente?<svg class="icon"><use href="#i-plus"/></svg></summary><div class="faq__a"><p>Resposta curta e objetiva.</p></div></details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--inverse on-dark" id="contato">
+        <div class="container contact">
+          <div class="contact__aside">
+            <header class="section-head">
+              <p class="eyebrow">Contato</p>
+              <h2 class="t-h2">Título do bloco de contato</h2>
+              <p class="section-head__lead">Frase curta sobre como o atendimento começa.</p>
+            </header>
+            <div class="contact__actions">
+              <a class="btn btn--inverse" href="#contato"><svg class="icon"><use href="#i-msg"/></svg>Conversar no WhatsApp</a>
+              <a class="link-arrow" href="#contato"><svg class="icon icon--accent"><use href="#i-phone"/></svg>(00) 0000-0000</a>
+            </div>
+          </div>
+          <div class="form-card">
+            <form class="form" action="/contato" method="post" novalidate>
+              <div class="field"><input class="field__control" id="f-nome" name="nome" type="text" autocomplete="name" placeholder=" " required><label class="field__label" for="f-nome">Nome</label></div>
+              <div class="form__row form__row--2">
+                <div class="field"><input class="field__control" id="f-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required><label class="field__label" for="f-tel">Telefone com DDD</label></div>
+                <div class="field"><input class="field__control" id="f-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder=" " required><label class="field__label" for="f-email">E-mail</label></div>
+              </div>
+              <div class="field"><textarea class="field__control" id="f-caso" name="caso" placeholder=" " rows="4" aria-describedby="f-caso-hint"></textarea><label class="field__label" for="f-caso">Descreva brevemente o seu caso</label><p class="field__hint" id="f-caso-hint">Não inclua documentos ou dados sensíveis nesta mensagem.</p></div>
+              <div class="consent"><input class="consent__box" id="f-lgpd" name="consentimento" type="checkbox" required><label for="f-lgpd">Concordo com o tratamento dos meus dados para retorno do contato, conforme a <a href="#contato">Política de Privacidade</a>.</label></div>
+              <button class="btn btn--primary btn--block" type="submit">Enviar mensagem</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer on-dark">
+      <div class="container">
+        <div class="site-footer__grid">
+          <div class="site-footer__col">
+            <a class="logo logo--footer" href="#topo" aria-label="LW Advocacia, voltar ao topo"><img class="pv-logo" src="assets/lw-advocacia-logo-wordmark.jpg" alt="" width="1376" height="768" loading="lazy"></a>
+            <p style="margin:0">Nome do(a) Advogado(a)<br><span class="t-muted">OAB/UF 000.000</span></p>
+            <ul class="social" aria-label="Redes sociais">
+              <li><a href="#topo" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a></li>
+              <li><a href="#topo" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a></li>
+            </ul>
+          </div>
+          <div class="site-footer__col">
+            <p class="eyebrow">Contato</p>
+            <div class="contact-line"><svg class="icon"><use href="#i-pin"/></svg><address>Rua Exemplo, 000, sala 00<br>Bairro · Cidade/UF · 00000-000</address></div>
+            <p class="contact-line"><svg class="icon"><use href="#i-phone"/></svg><span>(00) 0000-0000</span></p>
+            <p class="contact-line"><svg class="icon"><use href="#i-mail"/></svg><span>contato@exemplo.com.br</span></p>
+          </div>
+          <div class="site-footer__col">
+            <p class="eyebrow">Como chegar</p>
+            <div class="map-slot"><div class="media-placeholder">Mapa carregado sob demanda</div></div>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <p class="oab-notice">Conteúdo de caráter exclusivamente informativo, em conformidade com o Provimento 205/2021 do Conselho Federal da OAB.</p>
+          <p><a href="#topo">Política de Privacidade</a> · © 2026 LW Advocacia</p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="pv-fold">
+      <section class="cookie" role="region" aria-label="Aviso de cookies">
+        <p>Usamos cookies essenciais e, com a sua permissão, cookies de medição. Veja a <a href="#topo">Política de Privacidade</a>.</p>
+        <div class="cookie__actions">
+          <button class="btn btn--primary btn--sm" type="button" data-cookie>Aceitar</button>
+          <button class="btn btn--secondary btn--sm" type="button" data-cookie>Recusar</button>
+          <button class="cookie__prefs" type="button">Preferências</button>
+        </div>
+      </section>
+      <a class="fab" href="#contato" aria-label="Conversar no WhatsApp"><svg class="icon"><use href="#i-msg"/></svg></a>
+    </div>
+  </div>
+</template>
+
+<script>
+(function () {
+  var screens = Array.prototype.slice.call(document.querySelectorAll('.pv-screen'));
+  var tpl = document.getElementById('landing');
+
+  // Monta uma cópia da landing por tela, com ids únicos
+  screens.forEach(function (screen, n) {
+    var frag = tpl.content.cloneNode(true);
+    var sfx = '-' + screen.dataset.w;
+    frag.querySelectorAll('[id]').forEach(function (el) { el.id += sfx; });
+    frag.querySelectorAll('[for]').forEach(function (el) { el.htmlFor += sfx; });
+    frag.querySelectorAll('[aria-describedby]').forEach(function (el) {
+      el.setAttribute('aria-describedby', el.getAttribute('aria-describedby').split(' ').map(function (t) { return t + sfx; }).join(' '));
+    });
+    frag.querySelectorAll('a[href^="#"], use').forEach(function (el) {
+      var h = el.getAttribute('href');
+      if (h && h.length > 1) el.setAttribute('href', h + sfx);
+    });
+    screen.appendChild(frag);
+    var fold = screen.querySelector('.pv-fold');
+    fold.style.height = screen.dataset.fold + 'px';
+  });
+
+  // Logo: publicado em assets/; aberto localmente, fica em ../assets/
+  document.querySelectorAll('img.pv-logo').forEach(function (img) {
+    img.addEventListener('error', function () {
+      if (!img.dataset.retry) { img.dataset.retry = '1'; img.src = '../assets/lw-advocacia-logo-wordmark.jpg'; }
+    });
+  });
+
+  // Media queries viram container queries e vw vira cqi, para cada tela responder à própria largura
+  function rewrite(css) {
+    return css.replace(/@media\s*\(min-width:/g, '@container pv (min-width:').replace(/(\d)vw\b/g, '$1cqi');
+  }
+  Promise.all(['tokens.css', 'components.css'].map(function (u) {
+    return fetch(u).then(function (r) { if (!r.ok) throw new Error(u); return r.text(); });
+  })).then(function (texts) {
+    var style = document.createElement('style');
+    style.textContent = rewrite(texts.join('\n'));
+    document.head.appendChild(style);
+    document.getElementById('css-components').disabled = true;
+    layout();
+  }).catch(function () {
+    // Sem fetch (arquivo aberto do disco): mostra só uma tela, responsiva pela janela
+    document.querySelector('.pv-device[data-w="1440"]').hidden = true;
+    var s = document.querySelector('.pv-screen[data-w="390"]');
+    s.style.width = '100%';
+    s.parentNode.parentNode.querySelector('.pv-label').textContent = 'Responsiva pela largura da janela';
+  });
+
+  function layout() {
+    var stage = document.getElementById('stage');
+    var avail = stage.clientWidth;
+    var mobile = screens[0], desk = screens[1];
+    var mScale = Math.min(1, avail / 390);
+    var sideBySide = avail >= 390 + 32 + 560;
+    var dAvail = sideBySide ? avail - 390 - 32 : avail;
+    var dScale = Math.min(1, dAvail / 1440);
+    mobile.style.width = '390px'; mobile.style.zoom = mScale;
+    desk.style.width = '1440px'; desk.style.zoom = dScale;
+    document.getElementById('pv-scale').textContent = dScale < 1 ? '· escala ' + Math.round(dScale * 100) + '%' : '';
+    screens.forEach(function (s) {
+      var cookie = s.querySelector('.cookie');
+      var fab = s.querySelector('.fab');
+      var narrow = s.dataset.w === '390';
+      fab.style.setProperty('--fab-offset', (!cookie.hidden && narrow) ? (cookie.offsetHeight + 12) + 'px' : '0px');
+    });
+  }
+  window.addEventListener('resize', function () { if (document.getElementById('css-components').disabled) layout(); });
+
+  // Cookies: escolher fecha o banner e devolve o FAB ao lugar
+  document.querySelectorAll('[data-cookie]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var c = b.closest('.cookie'); c.hidden = true;
+      c.parentNode.querySelector('.fab').style.setProperty('--fab-offset', '0px');
+    });
+  });
+
+  // Microinteração 1: revelação do título, uma vez
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    var i = 0;
+    (function wrap(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+        if (child.nodeType === 3) {
+          var f = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { f.appendChild(document.createTextNode(part)); return; }
+            var s = document.createElement('span');
+            s.className = 'w'; s.style.setProperty('--i', i++); s.textContent = part;
+            f.appendChild(s);
+          });
+          node.replaceChild(f, child);
+        } else if (child.nodeType === 1) { wrap(child); }
+      });
+    })(el);
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    requestAnimationFrame(function () { el.classList.add('is-ready'); });
+  });
+
+  // Microinteração 5: pulso único do FAB após 6 s
+  setTimeout(function () {
+    document.querySelectorAll('.fab').forEach(function (f) { f.classList.add('is-pulsing'); });
+  }, 6000);
+
+  // Sem envio real na prévia
+  document.querySelectorAll('form').forEach(function (f) { f.addEventListener('submit', function (e) { e.preventDefault(); }); });
+})();
+</script>

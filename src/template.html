@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+{{> head}}
+</head>
+<body>
+<!--SPRITE-->
+{{> header}}
+<main id="conteudo" tabindex="-1">
+  <section class="hero" id="topo" aria-labelledby="hero-titulo">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">{{hero.eyebrow}}</p>
+        <h1 class="t-display reveal" id="hero-titulo">{{{build.heroTitulo}}}</h1>
+        <p class="hero__lead">{{hero.subtitulo}}</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="{{build.whatsappUrl}}" target="_blank" rel="noopener" data-track="whatsapp" data-location="hero"><svg class="icon" aria-hidden="true"><use href="#i-message-circle"/></svg>{{hero.ctaPrimario}}</a>
+          <a class="btn btn--secondary" href="{{build.telUrl}}" data-track="phone" data-location="hero"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>{{hero.ctaSecundario}}</a>
+        </div>
+        <p class="hero__meta">{{advogado.nome}} · {{advogado.oab}}</p>
+      </div>
+      <figure class="hero__media">{{{build.imgHero}}}</figure>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="atuacao" aria-labelledby="atuacao-titulo">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">{{areas.eyebrow}}</p>
+        <h2 class="t-h2" id="atuacao-titulo">{{areas.titulo}}</h2>
+        <p class="section-head__lead">{{areas.lead}}</p>
+      </header>
+      <div class="card-grid">
+        {{#each areas.itens}}<article class="practice-card">
+          <svg class="icon icon--32 practice-card__icon" aria-hidden="true"><use href="#i-{{icone}}"/></svg>
+          <h3 class="t-h3 practice-card__title">{{titulo}}</h3>
+          <p class="practice-card__text">{{descricao}}</p>
+          <a class="link-arrow" href="#contato">{{areas.linkRotulo}}<span class="visually-hidden"> sobre {{titulo}}</span><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </article>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sobre" aria-labelledby="sobre-titulo">
+    <div class="container about">
+      <figure class="about__media">{{{build.imgSobre}}}</figure>
+      <div class="about__body">
+        <header class="section-head">
+          <p class="eyebrow">{{sobre.eyebrow}}</p>
+          <h2 class="t-h2" id="sobre-titulo">{{sobre.titulo}}</h2>
+        </header>
+        <div>
+          <h3 class="t-h3 about__name">{{advogado.nome}}</h3>
+          <p class="about__role t-body-sm">{{advogado.formacao}}</p>
+        </div>
+        <p class="oab-id"><span class="oab-id__label">{{sobre.seloRotulo}}</span><span class="oab-id__number">{{advogado.oab}}</span></p>
+        <p class="prose t-muted about__text">{{sobre.texto}}</p>
+        <ul class="check-list">
+          {{#each sobre.diferenciais}}<li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>{{this}}</span></li>{{/each}}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt" id="como-funciona" aria-labelledby="passos-titulo">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow">{{comoFunciona.eyebrow}}</p>
+        <h2 class="t-h2" id="passos-titulo">{{comoFunciona.titulo}}</h2>
+        <p class="section-head__lead">{{comoFunciona.lead}}</p>
+      </header>
+      <ol class="steps">
+        {{#each comoFunciona.passos}}<li class="steps__item"><span class="steps__num" aria-hidden="true">{{@num}}</span><h3 class="steps__title">{{titulo}}</h3><p class="steps__text">{{texto}}</p></li>
+        {{/each}}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="duvidas" aria-labelledby="faq-titulo">
+    <div class="container">
+      <header class="section-head section-head--center">
+        <p class="eyebrow">{{faq.eyebrow}}</p>
+        <h2 class="t-h2" id="faq-titulo">{{faq.titulo}}</h2>
+      </header>
+      <div class="faq faq--center">
+        {{#each faq.itens}}<details class="faq__item"><summary class="faq__q">{{pergunta}}<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="faq__a"><p>{{resposta}}</p></div></details>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--inverse on-dark" id="contato" aria-labelledby="contato-titulo">
+    <div class="container contact">
+      <div class="contact__aside">
+        <header class="section-head">
+          <p class="eyebrow">{{contatoSecao.eyebrow}}</p>
+          <h2 class="t-h2" id="contato-titulo">{{contatoSecao.titulo}}</h2>
+          <p class="section-head__lead">{{contatoSecao.lead}}</p>
+        </header>
+        <div class="contact__actions">
+          <a class="btn btn--inverse" href="{{build.whatsappUrl}}" target="_blank" rel="noopener" data-track="whatsapp" data-location="contato"><svg class="icon" aria-hidden="true"><use href="#i-message-circle"/></svg>{{contatoSecao.ctaWhatsapp}}</a>
+          <a class="link-arrow" href="{{build.telUrl}}" data-track="phone" data-location="contato"><svg class="icon icon--accent" aria-hidden="true"><use href="#i-phone"/></svg>{{contato.telefone}}</a>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="form" id="form-contato" action="{{site.formEndpoint}}" method="post" data-form data-endpoint="{{site.formEndpoint}}">
+          <noscript><p class="form-status form-status--error"><svg class="icon" aria-hidden="true"><use href="#i-circle-alert"/></svg><span>{{contatoSecao.form.semJs}} <a href="{{build.whatsappUrl}}">WhatsApp</a> · <a href="{{build.telUrl}}">{{contato.telefone}}</a></span></p></noscript>
+          <div class="field">
+            <input class="field__control" id="f-nome" name="nome" type="text" autocomplete="name" placeholder=" " required maxlength="120" aria-describedby="f-nome-erro">
+            <label class="field__label" for="f-nome">{{contatoSecao.form.nome}}</label>
+            <p class="field__error" id="f-nome-erro"><svg class="icon" aria-hidden="true"><use href="#i-circle-alert"/></svg>{{contatoSecao.form.erroNome}}</p>
+          </div>
+          <div class="form__row form__row--2">
+            <div class="field">
+              <input class="field__control" id="f-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder=" " required pattern="\(?\d{2}\)?\s?9?\d{4}-?\d{4}" maxlength="16" aria-describedby="f-tel-erro">
+              <label class="field__label" for="f-tel">{{contatoSecao.form.telefone}}</label>
+              <p class="field__error" id="f-tel-erro"><svg class="icon" aria-hidden="true"><use href="#i-circle-alert"/></svg>{{contatoSecao.form.erroTelefone}}</p>
+            </div>
+            <div class="field">
+              <input class="field__control" id="f-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder=" " required maxlength="160" aria-describedby="f-email-erro">
+              <label class="field__label" for="f-email">{{contatoSecao.form.email}}</label>
+              <p class="field__error" id="f-email-erro"><svg class="icon" aria-hidden="true"><use href="#i-circle-alert"/></svg>{{contatoSecao.form.erroEmail}}</p>
+            </div>
+          </div>
+          <div class="field">
+            <textarea class="field__control" id="f-caso" name="descricao" placeholder=" " rows="4" required minlength="10" maxlength="2000" autocomplete="off" aria-describedby="f-caso-dica f-caso-erro"></textarea>
+            <label class="field__label" for="f-caso">{{contatoSecao.form.caso}}</label>
+            <p class="field__hint" id="f-caso-dica">{{contatoSecao.form.casoDica}}</p>
+            <p class="field__error" id="f-caso-erro"><svg class="icon" aria-hidden="true"><use href="#i-circle-alert"/></svg>{{contatoSecao.form.erroCaso}}</p>
+          </div>
+          <div class="consent-wrap">
+            <div class="consent">
+              <input class="consent__box" id="f-lgpd" name="consentimento" type="checkbox" value="sim" required aria-describedby="f-lgpd-erro">
+              <label for="f-lgpd">{{contatoSecao.form.consentimento}} <a href="politica-de-privacidade.html" target="_blank">{{rodape.politicaRotulo}}</a>.</label>
+            </div>
+            <p class="field__error" id="f-lgpd-erro"><svg class="icon" aria-hidden="true"><use href="#i-circle-alert"/></svg>{{contatoSecao.form.erroConsentimento}}</p>
+          </div>
+          <div class="hp" aria-hidden="true"><label for="f-site">Deixe este campo em branco</label><input id="f-site" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <input type="hidden" name="politica_versao" value="{{site.politicaVersao}}">
+          <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_term"><input type="hidden" name="utm_content">
+          <input type="hidden" name="origem">
+          <button class="btn btn--primary btn--block" type="submit" data-label-busy="{{contatoSecao.form.botaoEnviando}}">{{contatoSecao.form.botao}}</button>
+          <div class="form__status" aria-live="polite" data-form-status></div>
+          <template data-msg="success"><div class="form-status form-status--success" role="status"><svg class="icon" aria-hidden="true"><use href="#i-circle-check"/></svg><div><strong>{{contatoSecao.form.sucessoTitulo}}</strong>{{contatoSecao.form.sucessoTexto}}</div></div></template>
+          <template data-msg="error"><div class="form-status form-status--error" role="alert"><svg class="icon" aria-hidden="true"><use href="#i-circle-alert"/></svg><div><strong>{{contatoSecao.form.erroTitulo}}</strong>{{contatoSecao.form.erroTexto}} <a href="{{build.whatsappUrl}}" target="_blank" rel="noopener" data-track="whatsapp" data-location="erro-formulario">WhatsApp</a></div></div></template>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+{{> footer}}
+{{> fixos}}
+</body>
+</html>
