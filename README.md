@@ -2,7 +2,24 @@
 
 Landing page do escritório LW Advocacia em HTML semântico, CSS puro e JS vanilla, construída sobre o design system em https://claude.ai/artifact/SpNVkZTFhNCDT3NwiPE7tv. O conteúdo fica separado do layout (`content/site.json`) e é editável por um painel (Decap CMS).
 
-**Status:** pronto para uso local. Domínio, hospedagem e SSL ainda **não** estão configurados (veja `docs/publicacao.md`). ⚠️ O conteúdo usa **dados de exemplo propositalmente falsos** ("Fulana de Tal", OAB/BA 123.456, Xique-Xique/BA, domínio `example.com`). A lista completa para substituir está em `docs/pendencias.md`.
+🌐 **Site publicado:** https://leodwahhab.github.io/lw-advocacia/ (GitHub Pages)
+
+**Status:** publicado no GitHub Pages como demonstração. O domínio próprio ainda **não** está configurado (veja `docs/publicacao.md`). ⚠️ O conteúdo usa **dados de exemplo propositalmente falsos** ("Fulana de Tal", OAB/BA 123.456, Xique-Xique/BA, domínio `example.com`). A lista completa para substituir está em `docs/pendencias.md`.
+
+## Publicação (GitHub Pages)
+
+| | |
+| --- | --- |
+| Site | https://leodwahhab.github.io/lw-advocacia/ |
+| Política de Privacidade | https://leodwahhab.github.io/lw-advocacia/politica-de-privacidade.html |
+| Repositório | https://github.com/leodwahhab/lw-advocacia |
+| Deploys | https://github.com/leodwahhab/lw-advocacia/actions |
+
+- **Todo push na `main` publica o site sozinho** pelo workflow `.github/workflows/deploy.yml` (`npm ci` → `npm run build` → GitHub Pages). Se o `check-oab` encontrar um termo proibido, o deploy é barrado e o site no ar continua o anterior.
+- Para publicar uma alteração: edite (pelo painel local ou no `site.json`), depois `git add`, `git commit` e `git push`. O site atualiza em cerca de 1 minuto.
+- O painel `/admin/` publicado **não** funciona no GitHub Pages: não há backend de login. Edite localmente com `npm run dev` e faça push. Para editar online, veja `docs/publicacao.md`.
+- O GitHub Pages ignora o `dist/_headers`, então o cache fica no padrão do GitHub (10 min). Para cache longo e domínio próprio com mais controle, veja as opções em `docs/publicacao.md`.
+- Os links canônicos, o sitemap e a imagem de compartilhamento usam o `site.url` do conteúdo, hoje `https://www.example.com`. Ao definir o endereço definitivo, atualize esse campo.
 
 ## Como rodar
 
